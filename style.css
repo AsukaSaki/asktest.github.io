@@ -1,10 +1,10 @@
-/* 全局设定与字体 */
+/* --- 全局与设计变量 --- */
 :root {
-    --primary-text-color: #1d1d1f; /* 苹果的深灰色 */
-    --secondary-text-color: #6e6e73; /* 苹果的灰色 */
-    --background-color: #f5f5f7; /* 苹果的浅灰色背景 */
-    --link-color: #007aff; /* 苹果的蓝色 */
-    --border-color: #d2d2d7;
+    --primary-text-color: #f5f5f7;  /* 亮色文字 */
+    --secondary-text-color: #a1a1a6; /* 次要文字 */
+    --border-color: rgba(255, 255, 255, 0.2); /* 玻璃边框 */
+    --highlight-color: #007aff;
+    --card-bg-color: rgba(20, 20, 25, 0.5); /* 卡片背景色 */
 }
 
 * {
@@ -14,254 +14,198 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--background-color);
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--primary-text-color);
-    line-height: 1.6;
+    background-color: #000;
+    overflow-x: hidden;
 }
 
-/* 导航栏 */
-header {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 5%;
+/* --- 动态背景 --- */
+.background-gradient {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: url('images/background.jpg') no-repeat center center/cover;
+    /* 你也可以用纯CSS渐变做背景 */
+    /* background: radial-gradient(circle at top left, #5a2a88, #0b2a5e, #001f3f); */
+    animation: slow-pan 60s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+@keyframes slow-pan {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.2) translate(10%, 5%); }
+}
+
+/* --- 主容器与布局 --- */
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; }
+h2 { font-size: 2.5rem; font-weight: 500; text-align: center; margin-bottom: 50px; }
+p { color: var(--secondary-text-color); }
+
+/* --- 核心毛玻璃效果 --- */
+.glass-effect {
+    background: var(--card-bg-color);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* --- 导航栏 --- */
+header {
+    padding: 20px 0;
+    position: sticky;
+    top: 20px; /* 让导航栏在滚动时有悬浮感 */
     z-index: 100;
+    margin-bottom: 120px;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    padding: 15px 30px;
+    /* 应用毛玻璃效果 */
+    background: rgba(40, 40, 45, 0.6);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 50px; /* 胶囊形状 */
+    border: 1px solid var(--border-color);
 }
 
-nav .logo {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
+nav .logo { font-size: 1.2rem; font-weight: 500; }
+nav ul { list-style: none; display: flex; gap: 30px; }
+nav a { text-decoration: none; color: var(--secondary-text-color); font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+nav a:hover { color: #fff; }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--primary-text-color);
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--link-color);
-}
-
-/* 通用 Section 样式 */
-section {
-    padding: 100px 10%;
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-section:last-of-type {
-    border-bottom: none;
-}
-
-h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 40px;
-}
-
-p {
-    color: var(--secondary-text-color);
-    max-width: 600px;
-    margin: 0 auto 20px;
-}
-
-/* Hero Section */
+/* --- Hero Section --- */
 #hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff; /* 或者用图片: background: url('images/hero-background.jpg') no-repeat center center/cover; */
+    text-align: center;
+    padding: 80px 0;
+    margin-bottom: 120px;
 }
+#hero p { max-width: 500px; margin: 20px auto 30px; font-size: 1.2rem; }
 
 .cta-button {
     display: inline-block;
-    background-color: var(--link-color);
+    background: var(--highlight-color);
     color: #fff;
-    padding: 12px 24px;
+    padding: 14px 28px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 500;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
+.cta-button:hover { transform: scale(1.05); background-color: #0088ff; }
 
-.cta-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+
+/* --- 作品集 --- */
+#gallery {
+    margin-bottom: 120px;
 }
 
-/* Gallery Section */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
 
 .gallery-item {
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 16px;
+    transition: transform 0.3s ease;
 }
+.gallery-item:hover { transform: translateY(-10px); }
 
 .gallery-item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
+    width: 100%; height: 100%; display: block; object-fit: cover;
 }
 
 .gallery-item .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    color: #fff;
+    position: absolute; bottom: 0; left: 0; right: 0;
     padding: 40px 20px 20px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    opacity: 0; transform: translateY(20px); transition: 0.4s ease;
 }
+.gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
+.overlay h3 { font-size: 1.3rem; font-weight: 500; color: #fff; }
 
-.gallery-item:hover .overlay {
-    opacity: 1;
-}
-
-.overlay h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-/* About Section */
-#about {
-    background-color: #fff;
-}
-.about-container {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+/* --- 关于我 & 联系方式 --- */
+#about-contact {
+    padding: 60px;
+    margin-bottom: 80px;
+    /* 应用毛玻璃效果 */
+    composes: glass-effect; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
     text-align: left;
-    max-width: 900px;
-    margin: 0 auto;
 }
-
 .profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 120px; height: 120px;
+    border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--border-color);
+    margin-bottom: 20px;
 }
 
-.about-text p {
-    margin: 0 0 15px 0;
-    max-width: none;
-}
+#about-contact h2 { text-align: left; margin-bottom: 15px; font-size: 1.8rem; }
+#about-contact p { color: var(--secondary-text-color); }
+.contact-links { margin-top: 20px; }
+.contact-links a { margin-right: 20px; color: var(--highlight-color); text-decoration: none; font-weight: 500; }
 
-/* Contact Section */
-.contact-links a {
-    margin: 0 15px;
-    color: var(--link-color);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-/* Footer */
+/* --- 页脚 --- */
 footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--secondary-text-color);
-    font-size: 0.8rem;
+    text-align: center; padding: 40px;
+    color: var(--secondary-text-color); font-size: 0.9rem;
 }
 
-/* Modal (灯箱) */
+/* --- 灯箱Modal (基本不变，微调) --- */
 .modal {
-    display: none; 
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
+    display: none; position: fixed; z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
     animation: fadeIn 0.5s;
 }
 
 .modal-content {
-    margin: auto;
-    display: block;
-    max-width: 80%;
-    max-height: 80%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    margin: auto; display: block; max-width: 85%; max-height: 80%;
+    position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 16px;
 }
 
 #modal-caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    width: 80%;
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%); text-align: center;
+    color: #ccc; width: 80%;
 }
 #modal-title { font-size: 1.5rem; color: #fff; }
 #modal-details { font-size: 1rem; color: #ccc; }
 
 .close-button {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
+    position: absolute; top: 20px; right: 35px; color: #f1f1f1;
+    font-size: 40px; font-weight: bold; cursor: pointer;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-/* 响应式设计 */
+/* --- 响应式设计 --- */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
+    .main-container { padding: 0 20px; }
+    h1 { font-size: 2.8rem; }
     h2 { font-size: 2rem; }
-    nav ul { display: none; } /* 移动端可以简化导航 */
-    .about-container { flex-direction: column; }
+    #about-contact { grid-template-columns: 1fr; }
+    nav ul { display: none; } /* 移动端可以简化或改为汉堡菜单 */
 }
