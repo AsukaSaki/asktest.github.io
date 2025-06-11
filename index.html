@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的名字 - 画师</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">你的名字</div>
+            <ul>
+                <li><a href="#gallery">作品集</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>光与影的叙事者</h1>
+                <p>探索数字艺术的无限可能。</p>
+                <a href="#gallery" class="cta-button">查看作品</a>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>作品集</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-title="星夜下的鲸鱼" data-details="2024 | Procreate" data-img-src="images/artwork1.jpg">
+                    <img src="images/artwork1.jpg" alt="作品1">
+                    <div class="overlay"><h3>星夜下的鲸鱼</h3></div>
+                </div>
+                <div class="gallery-item" data-title="赛博都市" data-details="2023 | Photoshop" data-img-src="images/artwork2.jpg">
+                    <img src="images/artwork2.jpg" alt="作品2">
+                    <div class="overlay"><h3>赛博都市</h3></div>
+                </div>
+                </div>
+        </section>
+
+        <section id="about">
+            <div class="about-container">
+                <img src="images/profile-photo.jpg" alt="个人照片" class="profile-photo">
+                <div class="about-text">
+                    <h2>关于我</h2>
+                    <p>你好，我是[你的名字]，一位专注于概念设计与数字插画的画师。我热爱用色彩和光影构建引人入胜的世界，探索幻想与现实的边界。我的作品深受科幻电影与古典绘画的影响，致力于在每一个像素中注入情感与故事。</p>
+                    <p>擅长使用 Procreate, Photoshop 等工具进行创作。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>联系我</h2>
+            <p>如果您对我的作品感兴趣或有合作意向，欢迎通过以下方式联系我。</p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com">Email</a>
+                <a href="https://www.artstation.com/yourprofile" target="_blank">ArtStation</a>
+                <a href="https://www.instagram.com/yourprofile" target="_blank">Instagram</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 你的名字. All Rights Reserved.</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="modal-caption">
+            <h3 id="modal-title"></h3>
+            <p id="modal-details"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
